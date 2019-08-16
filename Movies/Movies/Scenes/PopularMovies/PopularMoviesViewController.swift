@@ -75,7 +75,7 @@ class PopularMoviesViewController: UIViewController, PopularMoviesDisplayLogic
   func doSomething()
   {
     let request = PopularMovies.Something.Request()
-    interactor?.doSomething(request: request)
+    interactor?.getPopularMovies(request: request)
   }
   
   func displaySomething(viewModel: PopularMovies.Something.ViewModel)

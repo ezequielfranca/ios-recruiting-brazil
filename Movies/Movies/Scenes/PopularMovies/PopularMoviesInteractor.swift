@@ -9,28 +9,33 @@ import UIKit
 
 protocol PopularMoviesBusinessLogic
 {
-  func doSomething(request: PopularMovies.Something.Request)
+    func getPopularMovies(request: PopularMovies.Something.Request)
 }
 
-protocol PopularMoviesDataStore
-{
-  //var name: String { get set }
-}
+protocol PopularMoviesDataStore {}
 
 class PopularMoviesInteractor: PopularMoviesBusinessLogic, PopularMoviesDataStore
-{
-  var presenter: PopularMoviesPresentationLogic?
-  var worker: PopularMoviesWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: PopularMovies.Something.Request)
-  {
-    worker = PopularMoviesWorker()
-    worker?.doSomeWork()
+{    
+    var presenter: PopularMoviesPresentationLogic?
+    var worker: PopularMoviesWorkerProtocol = PopularMoviesWorker()
     
-    let response = PopularMovies.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // MARK: getPopularMovies
+    func getPopularMovies(request: PopularMovies.Something.Request) {
+        var requester : NetworkPresenter
+        requester = NetworkPresenter()
+        worker.getPopularMovies(presenter: requester, service: .popularMovies, parameters: nil, page: nil, success: { (success) in
+            switch success {
+                
+            case .success(let popularMovies):
+                print(popularMovies)
+                self.presenter?.presentPopularMovies(response: PopularMovies.Something.Response(response: popularMovies))
+            case .error(_):
+                break
+            @unknown default:
+                break
+            }
+        }) { (failure) in
+            print(failure)
+        }
+    }
 }

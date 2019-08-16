@@ -15,6 +15,11 @@ public enum NetworkError: Error {
     case encodeError(type: String)
 }
 
+public enum Result<T> {
+    case success(T)
+    case error(NetworkError)
+}
+
 extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         
@@ -53,31 +58,33 @@ open class NetworkLayer {
     
     open func get<T: Decodable>(urlString: String,
                                 headers: [String: String] = [:],
-                                successHandler: @escaping (T) -> Void,
-                                errorHandler: @escaping ErrorHandler) {
+                                successHandler: @escaping (Result<T>) -> Void,
+                                errorHandler: @escaping (Result<NetworkError>) -> Void) {
         
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
                 print(error.localizedDescription)
-                errorHandler(NetworkError.genericError)
+                errorHandler(.error(NetworkError.genericError))
                 return
             }
             
             if self.isSuccessCode(urlResponse) {
                 guard let data = data else {
-                    return errorHandler(NetworkError.encodeError(type: "\(T.self)"))
+                    return errorHandler(.error(NetworkError.encodeError(type: "\(T.self)")))
                 }
                 
                 if let responseObject = try? JSONDecoder().decode(T.self, from: data) {
-                    successHandler(responseObject)
+                    let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                    JsonStringfy.prettyPrint(json!)
+                    successHandler(.success(responseObject))
                     return
                 }
             }
-            errorHandler(NetworkError.genericError)
+            errorHandler(.error(NetworkError.genericError))
         }
         
         guard let url = URL(string: urlString) else {
-            return errorHandler(NetworkError.urlError)
+            return errorHandler(.error(NetworkError.urlError))
         }
         
         var request = URLRequest(url: url)

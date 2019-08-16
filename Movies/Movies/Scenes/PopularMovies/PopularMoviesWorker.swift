@@ -7,9 +7,18 @@
 
 import UIKit
 
-class PopularMoviesWorker
+protocol PopularMoviesWorkerProtocol {
+    func getPopularMovies( presenter: NetworkPresenter,
+                           service : ServiceURL,
+                           parameters : String?,
+                           page : Int?,
+                           success: @escaping (Result<MovieResponse>) -> Void,
+                           error: @escaping (Result<NetworkError>) -> Void)
+}
+
+class PopularMoviesWorker : PopularMoviesWorkerProtocol
 {
-  func doSomeWork()
-  {
-  }
+    func getPopularMovies(presenter: NetworkPresenter, service: ServiceURL, parameters: String?, page: Int?, success: @escaping (Result<MovieResponse>) -> Void, error: @escaping (Result<NetworkError>) -> Void) {
+        presenter.fetchPopularMovies(service: service, parameters: parameters, page: page, success: success, error: error)
+    }
 }

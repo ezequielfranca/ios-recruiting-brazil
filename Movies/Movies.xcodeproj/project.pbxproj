@@ -20,6 +20,8 @@
 		F73961C62305E02C00E51F30 /* PopularMoviesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73961C02305E02C00E51F30 /* PopularMoviesModels.swift */; };
 		F73961C72305E02C00E51F30 /* PopularMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73961C12305E02C00E51F30 /* PopularMoviesViewController.swift */; };
 		F73961C82305E02C00E51F30 /* PopularMoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73961C22305E02C00E51F30 /* PopularMoviesInteractor.swift */; };
+		F73961CC23063D2800E51F30 /* NetworkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73961CA23063D2800E51F30 /* NetworkPresenter.swift */; };
+		F73961CD23063D2800E51F30 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73961CB23063D2800E51F30 /* NetworkLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		F73961C02305E02C00E51F30 /* PopularMoviesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesModels.swift; sourceTree = "<group>"; };
 		F73961C12305E02C00E51F30 /* PopularMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewController.swift; sourceTree = "<group>"; };
 		F73961C22305E02C00E51F30 /* PopularMoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesInteractor.swift; sourceTree = "<group>"; };
+		F73961CA23063D2800E51F30 /* NetworkPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkPresenter.swift; sourceTree = "<group>"; };
+		F73961CB23063D2800E51F30 /* NetworkLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		F73961852305DE5600E51F30 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				F73961C923063CF300E51F30 /* Network */,
 				F73961BB2305E00000E51F30 /* Scenes */,
 				F73961862305DE5600E51F30 /* AppDelegate.swift */,
 				F73961902305DE5800E51F30 /* Assets.xcassets */,
@@ -157,6 +162,15 @@
 				F73961B82305DF4100E51F30 /* PopularMoviesViewController.xib */,
 			);
 			path = PopularMovies;
+			sourceTree = "<group>";
+		};
+		F73961C923063CF300E51F30 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F73961CB23063D2800E51F30 /* NetworkLayer.swift */,
+				F73961CA23063D2800E51F30 /* NetworkPresenter.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,9 +308,11 @@
 				F739618F2305DE5600E51F30 /* Movies.xcdatamodeld in Sources */,
 				F73961C82305E02C00E51F30 /* PopularMoviesInteractor.swift in Sources */,
 				F73961C62305E02C00E51F30 /* PopularMoviesModels.swift in Sources */,
+				F73961CC23063D2800E51F30 /* NetworkPresenter.swift in Sources */,
 				F73961C72305E02C00E51F30 /* PopularMoviesViewController.swift in Sources */,
 				F73961C32305E02C00E51F30 /* PopularMoviesPresenter.swift in Sources */,
 				F73961872305DE5600E51F30 /* AppDelegate.swift in Sources */,
+				F73961CD23063D2800E51F30 /* NetworkLayer.swift in Sources */,
 				F73961C52305E02C00E51F30 /* PopularMoviesRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
